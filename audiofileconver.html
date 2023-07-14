@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Student Form</title>
+  <style>
+ /* CSS for styling the form */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 20px;
+}
+
+.form-container {
+  max-width: 500px;
+  margin: 0 auto;
+  background-color: #ECAB69;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.form-container h2 {
+  text-align: center;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.form-group select {
+  height: 40px;
+}
+
+.form-group .recorded-audio {
+  margin-top: 10px;
+}
+
+.form-group .record-controls {
+  margin-top: 10px;
+}
+
+.form-group .record-controls button {
+  margin-right: 10px;
+  padding: 8px 16px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.form-group .record-controls button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.form-group .success-message {
+  margin-top: 10px;
+  color: green;
+  font-weight: bold;
+}
+
+.form-group .error-message {
+  margin-top: 10px;
+  color: red;
+  font-weight: bold;
+}
+
+.form-group .button-container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.form-group .button-container button {
+  padding: 10px 20px;
+  background: #4CAF50;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  color: #fff;
+  padding: 20px 60px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* CSS for timer */
+.form-group .record-controls button {
+  padding: 8px 16px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+
+::placeholder {
+  color: darkgray;
+  font-size: 0.8rem;
+}
+
+select:required:invalid {
+  color: darkgray;
+  font-size: 0.8rem;
+}
+
+.center-button {
+  display: block;
+  margin: 0 auto;
+}
+
+/* Additional CSS for form responsiveness */
+@media screen and (max-width: 600px) {
+  .form-container {
+    padding: 10px;
+  }
+
+  .form-group .button-container {
+    margin-top: 10px;
+  }
+
+  .form-group .button-container button {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+
+  .btn-primary {
+    padding: 16px 40px;
+    font-size: 18px;
+  }
+}
+.form-group .record-controls {
+  margin-top: 10px;
+  margin-bottom: 20px; 
+}
+.form-group .record-controls {
+  display: flex;
+  align-items: center;
+}
+
+.form-group .record-controls span#timerDisplay {
+  margin-right: 10px;
+}
+  </style>
+  
+</head>
+<body>
+  <div class="form-container" >
+
+    <form id="studentForm" method="post">
+      <div class="form-group">
+        <label for="fullName"></label>
+        <input type="text" placeholder="Student Full Name" id="fullName" name="studentFullName" required>
+      </div>
+      <div class="form-group">
+        <label for="story">Record Your Story:</label>
+        <div class="record-controls">
+          <button id="recordButton" type="button">Record</button>
+          <button id="stopButton" type="button" disabled>Stop</button>
+          <button id="deleteButton" type="button" disabled>Delete</button>
+          <span id="timerDisplay" class="timerDisplay">60s</span>
+        </div>
+        <audio id="audioPreview" controls></audio>
+        <input type="hidden" id="audioUrl" name="audioUrl" required>
+       
+      </div>
+      <div class="form-group">
+        <label for="dob"></label>
+        <input type="text" onfocus="(this.type='date')" placeholder="Date of Birth" id="dob" name="dob" required min="2005-01-01" max="2018-12-31">
+      </div>
+      <div class="form-group">
+        <label for="selectedClass"></label>
+        <select id="selectedClass" name="selectedClass" required>
+          <option value="">Select Your Class</option>
+          <option value="1">Class 1</option>
+          <option value="2">Class 2</option>
+          <option value="1">Class 3</option>
+          <option value="2">Class 4</option>
+          <option value="1">Class 5</option>
+          <option value="2">Class 6</option>
+          <option value="1">Class 7</option>
+          <option value="2">Class 8</option>
+          <option value="1">Class 9</option>
+          <option value="2">Class 10</option>
+          <option value="11">Class 11</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="email"></label>
+        <input type="email" placeholder="Email" id="email" name="email" required>
+      </div>
+      <div class="form-group">
+        <label for="whatsapp"></label>
+        <input type="text" id="whatsapp" placeholder="WhatsApp Number:" name="phoneNumber" required>
+      </div>
+      <div class="form-group">
+        <label for="parentName"></label>
+        <input type="text" placeholder="Parent's Full Name" id="parentName" name="parentName" required>
+      </div>
+      <div class="form-group">
+        <label for="pincode"></label>
+        <input type="text" placeholder="PIN Code" id="pincode" name="zipCode" required>
+      </div>
+      <div class="button-container ">
+        <button type="submit" class="btn-primary center-button">Submit</button>
+      </div>
+    </form>
+    <div id="successMessage" class="success-message" style="display: none;">
+      Form submitted successfully!
+    </div>
+    <div id="errorMessage" class="error-message" style="display: none;">
+      An error occurred. Please try again.
+    </div>
+  </div>
+
+  <script>
+    // JavaScript code for recording audio
+    const recordButton = document.getElementById('recordButton');
+    const stopButton = document.getElementById('stopButton');
+    const deleteButton = document.getElementById('deleteButton');
+    const audioPreview = document.getElementById('audioPreview');
+    const audioUrlInput = document.getElementById('audioUrl');
+    const timerDisplay = document.getElementById('timerDisplay');
+    let mediaRecorder;
+    let chunks = [];
+    let countdownInterval;
+    let countdown = 60;
+     
+
+    recordButton.addEventListener('click', startRecording);
+    stopButton.addEventListener('click', stopRecording);
+    deleteButton.addEventListener('click', deleteRecording);
+
+    function startRecording() {
+      recordButton.disabled = true;
+      stopButton.disabled = false;
+      deleteButton.disabled = true;
+
+      chunks = [];
+      const constraints = { audio: true };
+      navigator.mediaDevices.getUserMedia(constraints)
+        .then(function(stream) {
+          mediaRecorder = new MediaRecorder(stream);
+          mediaRecorder.start();
+
+          mediaRecorder.addEventListener('dataavailable', function(event) {
+            chunks.push(event.data);
+          });
+          startCountdown();
+        })
+        .catch(function(error) {
+          console.error('Error accessing microphone:', error);
+          recordButton.disabled = false;
+        });
+    }
+
+    function stopRecording() {
+      recordButton.disabled = false;
+      stopButton.disabled = true;
+      deleteButton.disabled = false;
+
+      mediaRecorder.stop();
+      clearInterval(countdownInterval);
+     countdown = 60;
+      mediaRecorder.addEventListener('stop', function() {
+        const audioBlob = new Blob(chunks, { type: 'audio/mp3' });
+        const audioUrl = URL.createObjectURL(audioBlob);
+
+        audioPreview.src = audioUrl;
+        audioUrlInput.value = audioUrl;
+         // Show the timer
+    
+      });
+    }
+
+    function deleteRecording() {
+      recordButton.disabled = false;
+      deleteButton.disabled = true;
+      audioPreview.src = '';
+      audioUrlInput.value = '';
+      clearInterval(countdownInterval);
+  countdown = 60;
+  timerDisplay.textContent = '60s';
+    }
+    function startCountdown() {
+  countdownInterval = setInterval(function() {
+    countdown--;
+    timerDisplay.textContent = countdown + 's';
+    if (countdown === 0) {
+      stopRecording();
+    }
+  }, 1000);
+}
+
+    // JavaScript code for form submission
+    const form = document.getElementById('studentForm');
+    const successMessage = document.getElementById('successMessage');
+    const errorMessage = document.getElementById('errorMessage');
+
+    form.addEventListener('submit', async function(event){
+      event.preventDefault();
+
+      // Perform form validation
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+
+    var studentFullName = document.getElementById('fullName').value;
+    var dob = document.getElementById('dob').value;
+    var selectedClass = document.getElementById('selectedClass').value;
+    var email = document.getElementById('email').value;
+    var phoneNumber = document.getElementById('whatsapp').value;
+    var parentsName = document.getElementById('parentName').value;
+    var zipCode = document.getElementById('pincode').value;
+    var audioUrl = document.getElementById('audioUrl').value;
+
+    var formData = {
+        studentFullName :studentFullName,
+        audioUrl: audioUrl,
+        dob :dob,
+        selectedClass :selectedClass,
+        email :email,
+        phoneNumber :phoneNumber,
+        parentName :parentName,
+        zipCode :zipCode
+    };
+    try {
+    // Simulate form submission and handle success/error
+    await submitForm();
+    successMessage.style.display = 'block';
+    form.reset();
+    deleteRecording();
+    setTimeout(function() {
+      successMessage.style.display = 'none';
+    }, 3000);
+  } catch (error) {
+    console.error('An error occurred:', error);
+    errorMessage.style.display = 'block';
+    setTimeout(function() {
+      errorMessage.style.display = 'none';
+    }, 3000);
+  }
+});
+
+async function submitForm() {
+  const formData = new FormData(form);
+  const url = 'http://localhost:8080/add-user';
+  const options = {
+    method: 'POST',
+        body: JSON.stringify(Object.fromEntries(formData)),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      };
+
+  const response = await fetch(url, options);
+  if (!response.ok) {
+    throw new Error('Form submission failed');
+  }
+}
+</script>
+</body>
+</html>
